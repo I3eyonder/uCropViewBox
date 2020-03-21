@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="UCropViewBox">
+        <attr name="cropFramePadding" format="dimension" />
+    </declare-styleable>
+</resources>

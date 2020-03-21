@@ -1,0 +1,3 @@
+rootProject.name='uCropViewBox'
+include ':app'
+include ':ucrop-view-box'
