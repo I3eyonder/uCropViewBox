@@ -28,6 +28,33 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/btnRatio11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1:1"
+        app:layout_constraintEnd_toStartOf="@+id/btnRatio169"
+        app:layout_constraintStart_toStartOf="@+id/btnCropRandom"
+        app:layout_constraintTop_toBottomOf="@+id/btnCropRandom" />
+
+    <Button
+        android:id="@+id/btnRatio169"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="16:9"
+        app:layout_constraintBaseline_toBaselineOf="@+id/btnRatio11"
+        app:layout_constraintEnd_toStartOf="@+id/btnRatio32"
+        app:layout_constraintStart_toEndOf="@+id/btnRatio11" />
+
+    <Button
+        android:id="@+id/btnRatio32"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="3:2"
+        app:layout_constraintBaseline_toBaselineOf="@+id/btnRatio11"
+        app:layout_constraintEnd_toEndOf="@+id/btnPickImage"
+        app:layout_constraintStart_toEndOf="@+id/btnRatio169" />
+
     <com.hieupt.ucropviewbox.UCropViewBox
         android:id="@+id/uCropViewBox"
         android:layout_width="match_parent"
@@ -36,7 +63,7 @@
         app:cropFramePadding="0dp"
         app:layout_constraintBottom_toTopOf="@+id/btnSaveImage"
         app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toBottomOf="@+id/btnCropRandom" />
+        app:layout_constraintTop_toBottomOf="@+id/btnRatio11" />
 
     <Button
         android:id="@+id/btnSaveImage"

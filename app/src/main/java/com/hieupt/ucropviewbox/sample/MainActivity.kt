@@ -39,11 +39,7 @@ class MainActivity : AppCompatActivity(), MultiplePermissionsListener, BitmapCro
     private fun initViews() {
         uCropViewBox.apply {
             bindToLifecycle(lifecycle)
-            UCrop.Options().apply {
-                withAspectRatio(1f, 1f)
-            }.also {
-                withOptions(it)
-            }
+            options.withAspectRatio(1f, 1f)
         }
     }
 
@@ -66,6 +62,15 @@ class MainActivity : AppCompatActivity(), MultiplePermissionsListener, BitmapCro
         }
         btnSaveImage.setOnClickListener {
             uCropViewBox.cropAndSaveImage(callback = this)
+        }
+        btnRatio11.setOnClickListener {
+            uCropViewBox.setTargetAspectRatio(1f)
+        }
+        btnRatio169.setOnClickListener {
+            uCropViewBox.setTargetAspectRatio(16f, 9f)
+        }
+        btnRatio32.setOnClickListener {
+            uCropViewBox.setTargetAspectRatio(3f, 2f)
         }
     }
 

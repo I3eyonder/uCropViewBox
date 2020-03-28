@@ -5,7 +5,7 @@ def bintrayUserEnvKey = 'BINTRAY_USER'
 def bintrayApiEnvKey = 'BINTRAY_KEY'
 
 def groupName = 'com.dev.hieupt'
-def versionName = '1.0'
+def versionName = '1.1'
 def pkgRepoName = 'uCropViewBox'
 def pkgName = 'ucrop-view-box'
 def pkgDesc = 'using uCrop as a standalone View'

@@ -1,7 +1,7 @@
 # uCropViewBox
 Using [uCrop](https://github.com/Yalantis/uCrop) as a standalone View
 ```
-implementation 'com.dev.hieupt:ucrop-view-box:1.0'
+implementation 'com.dev.hieupt:ucrop-view-box:1.1'
 ```
  Usage
 ```

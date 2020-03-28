@@ -37,7 +37,7 @@ class UCropViewBox : FrameLayout, LifecycleObserver {
 
     private val transformImageListeners = mutableSetOf<TransformImageView.TransformImageListener>()
 
-    private var optionBundle = UCrop.Options().optionBundle
+    var options = UCrop.Options()
         set(value) {
             field = value
             processOptions()
@@ -103,11 +103,12 @@ class UCropViewBox : FrameLayout, LifecycleObserver {
     }
 
     fun withOptions(options: UCrop.Options) {
-        optionBundle = options.optionBundle
+        this.options = options
     }
 
     @SuppressLint("PrivateResource")
     private fun processOptions() {
+        val optionBundle = options.optionBundle
         // Crop image view options
         gestureCropImageView.apply {
             maxBitmapSize = optionBundle.getInt(
@@ -256,6 +257,7 @@ class UCropViewBox : FrameLayout, LifecycleObserver {
     fun setTargetAspectRatio(targetAspectRatio: Float) {
         gestureCropImageView.apply {
             this.targetAspectRatio = targetAspectRatio
+            options.withAspectRatio(targetAspectRatio, 1f)
             setImageToWrapCropBounds()
         }
     }
