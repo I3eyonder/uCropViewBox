@@ -35,7 +35,7 @@ import androidx.annotation.Nullable;
  */
 public class CropImageView extends TransformImageView {
 
-    private static final String SAMPLE_OUTPUT_IMAGE_NAME = "SampleOutputImage.png";
+    private static final String SAMPLE_CROP_OUTPUT_IMAGE_NAME = "SampleCropOutputImage.png";
 
     public static final int DEFAULT_MAX_BITMAP_SIZE = 0;
     public static final int DEFAULT_IMAGE_TO_CROP_BOUNDS_ANIM_DURATION = 500;
@@ -83,7 +83,7 @@ public class CropImageView extends TransformImageView {
                 mCropRect, RectUtils.trapToRect(mCurrentImageCorners),
                 getCurrentScale(), getCurrentAngle());
 
-        String imageOutputPath = Uri.fromFile(new File(getContext().getCacheDir(), SAMPLE_OUTPUT_IMAGE_NAME)).getPath();
+        String imageOutputPath = Uri.fromFile(new File(getContext().getCacheDir(), SAMPLE_CROP_OUTPUT_IMAGE_NAME)).getPath();
 
         final CropParameters cropParameters = new CropParameters(
                 mMaxResultImageSizeX, mMaxResultImageSizeY,

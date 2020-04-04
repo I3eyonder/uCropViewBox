@@ -15,8 +15,14 @@ import com.yalantis.ucrop.util.RotationGestureDetector;
  */
 public class GestureCropImageView extends CropImageView {
 
-    public interface TouchEventWatcher {
-        void onTouch(MotionEvent event);
+    public interface OnInterceptTouchEvent {
+
+        /**
+         *
+         * @param event MotionEvent
+         * @return true to intercept, false otherwise
+         */
+        boolean onInterceptTouch(MotionEvent event);
     }
 
     private static final int DOUBLE_TAP_ZOOM_DURATION = 200;
@@ -29,7 +35,7 @@ public class GestureCropImageView extends CropImageView {
 
     private boolean mIsRotateEnabled = true, mIsScaleEnabled = true;
     private int mDoubleTapScaleSteps = 5;
-    private TouchEventWatcher mTouchEventWatcher;
+    private OnInterceptTouchEvent mOnInterceptTouchEvent;
 
     public GestureCropImageView(Context context) {
         super(context);
@@ -67,8 +73,8 @@ public class GestureCropImageView extends CropImageView {
         return mDoubleTapScaleSteps;
     }
 
-    public void setTouchEventWatcher(@Nullable TouchEventWatcher watcher) {
-        mTouchEventWatcher = watcher;
+    public void setOnInterceptTouch(@Nullable OnInterceptTouchEvent onInterceptTouchEvent) {
+        mOnInterceptTouchEvent = onInterceptTouchEvent;
     }
 
     /**
@@ -79,8 +85,8 @@ public class GestureCropImageView extends CropImageView {
      */
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if (mTouchEventWatcher != null) {
-            mTouchEventWatcher.onTouch(event);
+        if (mOnInterceptTouchEvent != null && mOnInterceptTouchEvent.onInterceptTouch(event)) {
+            return true;
         }
         if ((event.getAction() & MotionEvent.ACTION_MASK) == MotionEvent.ACTION_DOWN) {
             cancelAllAnimations();

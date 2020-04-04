@@ -54,7 +54,7 @@ class UCropViewBox : FrameLayout, LifecycleObserver {
         }
     }
 
-    private var touchEventWatcher: GestureCropImageView.TouchEventWatcher? = null
+    private var onInterceptTouchEvent: GestureCropImageView.OnInterceptTouchEvent? = null
 
     constructor(context: Context) : super(context) {
         init()
@@ -89,12 +89,15 @@ class UCropViewBox : FrameLayout, LifecycleObserver {
     }
 
     private fun setupCropImageView() {
-        gestureCropImageView.setTransformImageListener(internalTransformListener)
+        gestureCropImageView.apply {
+            setTransformImageListener(internalTransformListener)
+            setOnInterceptTouch(onInterceptTouchEvent)
+        }
     }
 
-    fun setTouchEventWatcher(watcher: GestureCropImageView.TouchEventWatcher?) {
-        touchEventWatcher = watcher
-        gestureCropImageView.setTouchEventWatcher(touchEventWatcher)
+    fun setOnInterceptTouch(onInterceptTouchEvent: GestureCropImageView.OnInterceptTouchEvent?) {
+        this.onInterceptTouchEvent = onInterceptTouchEvent
+        gestureCropImageView.setOnInterceptTouch(this.onInterceptTouchEvent)
     }
 
     fun addTransformImageListener(transformImageListener: TransformImageView.TransformImageListener) {
@@ -240,6 +243,7 @@ class UCropViewBox : FrameLayout, LifecycleObserver {
     private fun resetCropView() {
         uCropView.resetCropImageView()
         setupCropImageView()
+        processOptions()
     }
 
     private fun blockCropView(isBlocking: Boolean) {
@@ -250,8 +254,6 @@ class UCropViewBox : FrameLayout, LifecycleObserver {
         blockCropView(true)
         try {
             resetCropView()
-            gestureCropImageView.setTouchEventWatcher(touchEventWatcher)
-            processOptions()
             Uri.fromFile(File(uCropView.context.cacheDir, SAMPLE_CROP_IMAGE_NAME))
                 .let { imageCropUri ->
                     gestureCropImageView.setImageUri(inputUri, imageCropUri)
