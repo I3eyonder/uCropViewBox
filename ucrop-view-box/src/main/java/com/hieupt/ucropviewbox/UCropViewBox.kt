@@ -18,6 +18,7 @@ import com.yalantis.ucrop.UCrop
 import com.yalantis.ucrop.callback.BitmapCropCallback
 import com.yalantis.ucrop.model.AspectRatio
 import com.yalantis.ucrop.view.CropImageView
+import com.yalantis.ucrop.view.GestureCropImageView
 import com.yalantis.ucrop.view.OverlayView
 import com.yalantis.ucrop.view.TransformImageView
 import kotlinx.android.synthetic.main.ucrop_view_box_layout.view.*
@@ -53,6 +54,8 @@ class UCropViewBox : FrameLayout, LifecycleObserver {
         }
     }
 
+    private var touchEventWatcher: GestureCropImageView.TouchEventWatcher? = null
+
     constructor(context: Context) : super(context) {
         init()
     }
@@ -87,6 +90,11 @@ class UCropViewBox : FrameLayout, LifecycleObserver {
 
     private fun setupCropImageView() {
         gestureCropImageView.setTransformImageListener(internalTransformListener)
+    }
+
+    fun setTouchEventWatcher(watcher: GestureCropImageView.TouchEventWatcher?) {
+        touchEventWatcher = watcher
+        gestureCropImageView.setTouchEventWatcher(touchEventWatcher)
     }
 
     fun addTransformImageListener(transformImageListener: TransformImageView.TransformImageListener) {
@@ -238,18 +246,16 @@ class UCropViewBox : FrameLayout, LifecycleObserver {
         blockingView.isClickable = isBlocking
     }
 
-    fun setImageUri(inputUri: Uri, outputUri: Uri? = null) {
+    fun setImageUri(inputUri: Uri) {
         blockCropView(true)
-        val outUri = if (outputUri != null) {
-            outputUri
-        } else {
-            val destinationFileName = SAMPLE_CROPPED_IMAGE_NAME
-            Uri.fromFile(File(uCropView.context.cacheDir, destinationFileName))
-        }
         try {
             resetCropView()
+            gestureCropImageView.setTouchEventWatcher(touchEventWatcher)
             processOptions()
-            gestureCropImageView.setImageUri(inputUri, outUri)
+            Uri.fromFile(File(uCropView.context.cacheDir, SAMPLE_CROP_IMAGE_NAME))
+                .let { imageCropUri ->
+                    gestureCropImageView.setImageUri(inputUri, imageCropUri)
+                }
         } catch (e: Exception) {
         }
     }
@@ -332,7 +338,7 @@ class UCropViewBox : FrameLayout, LifecycleObserver {
     }
 
     companion object {
-        private const val SAMPLE_CROPPED_IMAGE_NAME = "SampleCropImage.png"
+        private const val SAMPLE_CROP_IMAGE_NAME = "SampleCropImage.png"
         private const val DEFAULT_COMPRESS_QUALITY = 90
         private val DEFAULT_COMPRESS_FORMAT = Bitmap.CompressFormat.JPEG
     }
