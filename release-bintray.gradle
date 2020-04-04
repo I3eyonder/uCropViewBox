@@ -1,0 +1,33 @@
+/**
+ * Bintray release configuration
+ * */
+ext {
+  bintrayRepo = 'uCropViewBox'
+  bintrayName = POM_BINTRAY_NAME
+
+  publishedGroupId = 'com.dev.hieupt'
+  libraryName = 'uCropViewBox'
+  artifact = POM_ARTIFACT_ID
+  packagingType = POM_PACKAGING
+
+  libraryDescription = POM_DESCRIPTION
+
+  siteUrl = 'https://github.com/hieupham1993/uCropViewBox'
+  gitUrl = 'https://github.com/hieupham1993/uCropViewBox.git'
+
+  libraryVersion = POM_VERSION
+
+  developerId = 'hieupham1993'
+  developerName = 'Hieu Pham'
+  developerEmail = 'hieupham1993@live.com'
+
+  licenseName = 'MIT'
+  licenseUrl = 'https://github.com/quangctkm9207/multi-library-bintray/LICENSE'
+  allLicenses = ['MIT','Apache-2.0']
+}
+
+// Set up the Android Maven publication.
+apply from: rootProject.file('jcenter/maven-install.gradle')
+
+// Publish on Bintray.
+apply from: rootProject.file('jcenter/bintray.gradle')
