@@ -19,7 +19,6 @@ install {
             licenses {
                 license {
                     name licenseName
-                    url licenseUrl
                 }
             }
             developers {
