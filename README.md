@@ -7,7 +7,7 @@
 //Core library. Can be used standalone just like origin uCrop with ability to intercept touch for GestureCropImageView
 implementation 'com.dev.hieupt:ucrop:2.2.4.1'
 //uCropViewBox
-implementation 'com.dev.hieupt:ucrop-view-box:1.3'
+implementation 'com.dev.hieupt:ucrop-view-box:1.4'
 ```
 **Usage**
 ```

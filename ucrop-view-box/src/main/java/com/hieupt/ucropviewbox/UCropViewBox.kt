@@ -44,6 +44,10 @@ class UCropViewBox : FrameLayout, LifecycleObserver {
             processOptions()
         }
 
+    var isRotateEnable: Boolean = true
+
+    var isScaleEnable: Boolean = true
+
     private val internalTransformListener = InternalTransformImageListener()
 
     private val imageTransformListener = object : SimpleTransformImageListener() {
@@ -92,6 +96,8 @@ class UCropViewBox : FrameLayout, LifecycleObserver {
         gestureCropImageView.apply {
             setTransformImageListener(internalTransformListener)
             setOnInterceptTouch(onInterceptTouchEvent)
+            isRotateEnabled = this@UCropViewBox.isRotateEnable
+            isScaleEnabled = this@UCropViewBox.isScaleEnable
         }
     }
 
